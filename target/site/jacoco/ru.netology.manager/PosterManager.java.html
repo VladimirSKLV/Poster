@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PosterManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poster</a> &gt; <a href="index.source.html" class="el_package">ru.netology.manager</a> &gt; <span class="el_source">PosterManager.java</span></div><h1>PosterManager.java</h1><pre class="source lang-java linenums">package ru.netology.manager;
+
+import lombok.Data;
+import ru.netology.domain.Poster;
+
+@Data
+
+public class PosterManager {
+<span class="fc" id="L9">    private Poster[] movies = new Poster[0];</span>
+<span class="fc" id="L10">    private int defaultMovieLength = 10;</span>
+
+<span class="fc" id="L12">    public PosterManager() {</span>
+
+<span class="fc" id="L14">    }</span>
+
+
+
+<span class="fc" id="L18">    public PosterManager(int customMovieLength) {</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (customMovieLength &gt; 0) {</span>
+<span class="fc" id="L20">            defaultMovieLength = customMovieLength;</span>
+        }
+
+<span class="fc" id="L23">    }</span>
+
+    public void addMovie(Poster movie) {
+<span class="fc" id="L26">        int length = movies.length + 1;</span>
+<span class="fc" id="L27">        Poster[] tmp = new Poster[length];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; movies.length; i++) {</span>
+<span class="fc" id="L29">            tmp[i] = movies[i];</span>
+        }
+<span class="fc" id="L31">        int lastMovie = tmp.length - 1;</span>
+<span class="fc" id="L32">        tmp[lastMovie] = movie;</span>
+<span class="fc" id="L33">        movies = tmp;</span>
+
+<span class="fc" id="L35">    }</span>
+
+    public Poster[] getLastAdd() {
+<span class="fc" id="L38">        int moviesLength = movies.length;</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (moviesLength &lt; defaultMovieLength) {</span>
+<span class="fc" id="L40">            defaultMovieLength = moviesLength;</span>
+        }
+<span class="fc" id="L42">        Poster[] customFilm = new Poster[defaultMovieLength];</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (int i = 0; i &lt; customFilm.length; i++) {</span>
+<span class="fc" id="L44">            int result = moviesLength - i - 1;</span>
+<span class="fc" id="L45">            customFilm[i] = movies[result];</span>
+
+        }
+<span class="fc" id="L48">        return customFilm;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
