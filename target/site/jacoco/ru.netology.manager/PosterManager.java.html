@@ -12,42 +12,34 @@ public class PosterManager {
 <span class="fc" id="L12">    public PosterManager() {</span>
 
 <span class="fc" id="L14">    }</span>
-
-
-
-<span class="fc" id="L18">    public PosterManager(int customMovieLength) {</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (customMovieLength &gt; 0) {</span>
-<span class="fc" id="L20">            defaultMovieLength = customMovieLength;</span>
+<span class="fc" id="L15">    public PosterManager(int customMovieLength) {</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (customMovieLength &gt; 0) {</span>
+<span class="fc" id="L17">            defaultMovieLength = customMovieLength;</span>
         }
-
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L19">    }</span>
 
     public void addMovie(Poster movie) {
-<span class="fc" id="L26">        int length = movies.length + 1;</span>
-<span class="fc" id="L27">        Poster[] tmp = new Poster[length];</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = 0; i &lt; movies.length; i++) {</span>
-<span class="fc" id="L29">            tmp[i] = movies[i];</span>
+<span class="fc" id="L22">        int length = movies.length + 1;</span>
+<span class="fc" id="L23">        Poster[] tmp = new Poster[length];</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (int i = 0; i &lt; movies.length; i++) {</span>
+<span class="fc" id="L25">            tmp[i] = movies[i];</span>
         }
-<span class="fc" id="L31">        int lastMovie = tmp.length - 1;</span>
-<span class="fc" id="L32">        tmp[lastMovie] = movie;</span>
-<span class="fc" id="L33">        movies = tmp;</span>
+<span class="fc" id="L27">        int lastMovie = tmp.length - 1;</span>
+<span class="fc" id="L28">        tmp[lastMovie] = movie;</span>
+<span class="fc" id="L29">        movies = tmp;</span>
 
-<span class="fc" id="L35">    }</span>
-
+<span class="fc" id="L31">    }</span>
     public Poster[] getLastAdd() {
-<span class="fc" id="L38">        int moviesLength = movies.length;</span>
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (moviesLength &lt; defaultMovieLength) {</span>
-<span class="fc" id="L40">            defaultMovieLength = moviesLength;</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (defaultMovieLength &gt; movies.length) {</span>
+<span class="fc" id="L34">            defaultMovieLength = movies.length;</span>
         }
-<span class="fc" id="L42">        Poster[] customFilm = new Poster[defaultMovieLength];</span>
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (int i = 0; i &lt; customFilm.length; i++) {</span>
-<span class="fc" id="L44">            int result = moviesLength - i - 1;</span>
-<span class="fc" id="L45">            customFilm[i] = movies[result];</span>
+<span class="fc" id="L36">        Poster[] customFilm = new Poster[defaultMovieLength];</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        for (int i = 0; i &lt; customFilm.length; i++) {</span>
+<span class="fc" id="L38">            int result = movies.length - i - 1;</span>
+<span class="fc" id="L39">            customFilm[i] = movies[result];</span>
 
         }
-<span class="fc" id="L48">        return customFilm;</span>
+<span class="fc" id="L42">        return customFilm;</span>
     }
-
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
