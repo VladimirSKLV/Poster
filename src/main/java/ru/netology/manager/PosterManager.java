@@ -1,44 +1,48 @@
 package ru.netology.manager;
 
-import lombok.Data;
 import ru.netology.domain.Poster;
 
-@Data
-
 public class PosterManager {
-    private Poster[] movies = new Poster[0];
-    private int defaultMovieLength = 10;
+    private Poster[] playbill = new Poster[0];
+    private int limit;
 
     public PosterManager() {
-
-    }
-    public PosterManager(int customMovieLength) {
-        if (customMovieLength > 0) {
-            defaultMovieLength = customMovieLength;
-        }
+        limit = 10;
     }
 
-    public void addMovie(Poster movie) {
-        int length = movies.length + 1;
+    public PosterManager(int limit) {
+        this.limit = limit;
+    }
+
+
+    public void add(Poster item) {
+        int length = playbill.length + 1;
         Poster[] tmp = new Poster[length];
-        for (int i = 0; i < movies.length; i++) {
-            tmp[i] = movies[i];
-        }
-        int lastMovie = tmp.length - 1;
-        tmp[lastMovie] = movie;
-        movies = tmp;
+        System.arraycopy(playbill, 0, tmp, 0, playbill.length);
+
+        int lastIndex = tmp.length - 1;
+        tmp[lastIndex] = item;
+        playbill = tmp;
 
     }
-    public Poster[] getLastAdd() {
-        if (defaultMovieLength > movies.length) {
-            defaultMovieLength = movies.length;
-        }
-        Poster[] customFilm = new Poster[defaultMovieLength];
-        for (int i = 0; i < customFilm.length; i++) {
-            int result = movies.length - i - 1;
-            customFilm[i] = movies[result];
 
+    public Poster[] findLast() {
+        Poster[] playbill = findAll();
+        Poster[] result;
+        if (limit < playbill.length) {
+            result = new Poster[limit];
+        } else {
+            result = new Poster[playbill.length];
         }
-        return customFilm;
+        for (int i = 0; i < result.length; i++) {
+            int index = playbill.length - i - 1;
+            result[i] = playbill[index];
+        }
+        return result;
     }
+
+    public Poster[] findAll() {
+        return playbill;
+    }
+
 }

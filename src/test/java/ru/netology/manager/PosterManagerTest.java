@@ -1,90 +1,125 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import ru.netology.domain.Poster;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
-class MovieManagerTest {
-
-    PosterManager manager = new PosterManager();
-
-    private Poster first = new Poster(1, "Bladshot", "http://", "actionMovie");
-    private Poster second = new Poster(2, "Ahead", "http://", "cartoon");
-    private Poster third = new Poster(3, "HotelBelgrad", "http://", "comedy");
-    private Poster fourth = new Poster(4, "Gentlemen", "http://", "actionMovie");
-    private Poster fifth = new Poster(5, "InvisibleMan", "http://", "horrors");
-    private Poster sixth = new Poster(6, "Trolls", "http://", "cartoon");
-    private Poster seventh = new Poster(7, "NumberOne", "http://", "comedy");
-    private Poster eighth = new Poster(8, "NumberTwo", "http://", "actionMovie");
-    private Poster ninth = new Poster(9, "NumberThree", "http://", "actionMovie");
-    private Poster tenth = new Poster(10, "NumberFour", "http://", "actionMovie");
-
-    Poster[] expected = {tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
-
+class ListFilmsManagerTest {
+    Poster film1 = new Poster(1, "Bladshot", "http://", "actionMovie");
+    Poster film2 = new Poster(2, "Ahead", "http://", "cartoon");
+    Poster film3 = new Poster(3, "HotelBelgrad", "http://", "comedy");
+    Poster film4 = new Poster(4, "Gentlemen", "http://", "actionMovie");
+    Poster film5 = new Poster(5, "InvisibleMan", "http://", "horrors");
+    Poster film6 = new Poster(6, "Trolls", "http://", "cartoon");
+    Poster film7 = new Poster(7, "NumberOne", "http://", "comedy");
+    Poster film8 = new Poster(8, "NumberTwo", "http://", "actionMovie");
+    Poster film9 = new Poster(9, "NumberThree", "http://", "actionMovie");
+    Poster film10 = new Poster(10, "NumberFour", "http://", "actionMovie");
+    Poster film11 = new Poster(11, "NumberFive", "http://", "actionMovie");
 
     @Test
-    void mustShowTenMovie() {
-        PosterManager manager = new PosterManager(10);
-        manager.addMovie(first);
-        manager.addMovie(second);
-        manager.addMovie(third);
-        manager.addMovie(fourth);
-        manager.addMovie(fifth);
-        manager.addMovie(sixth);
-        manager.addMovie(seventh);
-        manager.addMovie(eighth);
-        manager.addMovie(ninth);
-        manager.addMovie(tenth);
-        Poster[] actual = manager.getLastAdd();
-        assertArrayEquals(expected, actual);
+    public void test1FindLast() {
+        PosterManager manager = new PosterManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        manager.add(film9);
+        manager.add(film10);
+
+
+        Poster[] actual = manager.findLast();
+        Poster[] expected = {film10, film9, film8, film7, film6, film5, film4, film3, film2, film1};
+
+        assertArrayEquals(actual, expected);
     }
 
     @Test
-    void mustShowNothing() {
-        PosterManager manager = new PosterManager(0);
-        Poster[] actual = manager.getLastAdd();
-        Poster[] expected = new Poster[0];
-        assertArrayEquals(expected, actual);
+    public void test2FindLast() {
+        PosterManager manager = new PosterManager();
+        manager.add(film1);
+
+
+        Poster[] actual = manager.findLast();
+        Poster[] expected = {film1};
+
+        assertArrayEquals(actual, expected);
     }
 
     @Test
-    void mustShowValid() {
-        PosterManager manager = new PosterManager(5);
-        manager.addMovie(first);
-        manager.addMovie(second);
-        manager.addMovie(third);
-        manager.addMovie(fourth);
-        manager.addMovie(fifth);
-        manager.addMovie(sixth);
-        manager.addMovie(seventh);
-        manager.addMovie(eighth);
-        manager.addMovie(ninth);
-        manager.addMovie(tenth);
-        Poster movieToAdd = new Poster(11, "NumberFive", "http://", "horrors");
-        manager.addMovie(movieToAdd);
-        Poster[] actual = manager.getLastAdd();
-        Poster[] expected = {new Poster(11, "NumberFive", "http://", "horrors"), tenth, ninth, eighth, seventh};
-        assertArrayEquals(expected, actual);
+    public void test3FindLast() {
+        PosterManager manager = new PosterManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
 
+
+        Poster[] actual = manager.findLast();
+        Poster[] expected = {film5, film4, film3, film2, film1};
+
+        assertArrayEquals(actual, expected);
     }
 
     @Test
-    void mustShowOverMax() {
-        PosterManager manager = new PosterManager(11);
-        manager.addMovie(first);
-        manager.addMovie(second);
-        manager.addMovie(third);
-        manager.addMovie(fourth);
-        manager.addMovie(fifth);
-        manager.addMovie(sixth);
-        manager.addMovie(seventh);
-        manager.addMovie(eighth);
-        manager.addMovie(ninth);
-        manager.addMovie(tenth);
-        Poster[] actual = manager.getLastAdd();
-        assertArrayEquals(expected, actual);
+    public void test4FindLast() {
+        PosterManager manager = new PosterManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        manager.add(film9);
+        manager.add(film10);
+        manager.add(film11);
 
+
+        Poster[] actual = manager.findLast();
+        Poster[] expected = {film11, film10, film9, film8, film7, film6, film5, film4, film3, film2};
+
+        assertArrayEquals(actual, expected);
     }
-}
+
+    @Test
+    public void test5FindLast() {
+        PosterManager manager = new PosterManager();
+
+
+        Poster[] actual = manager.findLast();
+        Poster[] expected = {};
+
+        assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    public void testFindAll() {
+        PosterManager manager = new PosterManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        manager.add(film9);
+        manager.add(film10);
+
+
+        Poster[] actual = manager.findAll();
+        Poster[] expected = {film1, film2, film3, film4, film5, film6, film7, film8, film9, film10};
+
+        assertArrayEquals(actual, expected);
+    }}
